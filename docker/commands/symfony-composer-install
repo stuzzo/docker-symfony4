@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+docker-compose exec --user ${PROJECT_USER} ${PROJECT_NAME}_php composer install --prefer-dist --optimize-autoloader
+
+source "`dirname \"$0\"`/symfony-permissions"

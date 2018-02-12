@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]]; then
+  echo "You have to specify the CONTAINER NAME!"
+  echo "Remember, it must be the equal to the key specified in docker-compose file"
+  exit 0
+fi
+
+CONTAINER_NAME=$1
+
+docker logs $CONTAINER_NAME

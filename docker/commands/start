@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+# docker network create ${PROJECT_NAME}_default
+docker-compose build --force-rm
+docker-compose up -d --remove-orphans
+
+source "`dirname \"$0\"`/symfony-composer-install"

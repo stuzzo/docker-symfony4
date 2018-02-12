@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# remove all stopped containers
+docker ps -aq | xargs --no-run-if-empty docker rm
+
+# remove all unused volumes
+docker volume ls -q | xargs --no-run-if-empty docker volume rm
+
+# delete untagged images
+docker images --filter dangling=true -q | xargs --no-run-if-empty docker rmi
+
+# delete and untag every image that is not a container
+# a little more heinous since "<none>" is the repo/tag for dangling images
+docker images | awk 'NR>1 { if ($1 == "<none>") print $3; else print $1":"$2 }' | sort | xargs --no-run-if-empty docker rmi
+# sort is not necessary but is nice if you add a -tn1 to xargs so you can see each rm line

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+docker ps -a | grep "${PROJECT_NAME}" | awk '{print $1}' | xargs docker rm --force
+docker ps -a | grep "/bin/sh" | awk '{print $1}' | xargs docker rm --force
+docker ps -a | grep "bash" | awk '{print $1}' | xargs docker rm --force

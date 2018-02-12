@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+docker-compose exec "${PROJECT_NAME}_php" bash -c "rm -rf var/log/* var/cache/*"
+docker-compose exec "${PROJECT_NAME}_php" bash -c "chmod -R 777 var"
+
+echo -e "${GREEN}Reinitialized cache, logs and sessions folder!${NC}"

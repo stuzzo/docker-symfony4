@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+if [[ -z "$1" ]]; then
+  USER=${PROJECT_USER}
+else
+  USER=root
+fi
+
+docker-compose exec --user ${USER} ${PROJECT_NAME}_php bash

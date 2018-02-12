@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source "`dirname \"$0\"`/read-env-config"
+
+# docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "${PROJECT_NAME}_nginx"
+docker network inspect ${PROJECT_NAME}_default | grep "Gateway"

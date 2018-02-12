@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+TO-DO
+# source "`dirname \"$0\"`/read-env-config"
+
+# docker-compose exec "${PROJECT_NAME}_php" bash -c "php bin/console doctrine:database:drop --force --if-exists"
+# docker-compose exec "${PROJECT_NAME}_php" bash -c "php bin/console doctrine:database:create --if-not-exists"
+# docker-compose exec "${PROJECT_NAME}_php" bash -c "php bin/console doctrine:schema:update --force"
+# docker-compose exec "${PROJECT_NAME}_php" bash -c "php bin/console doctrine:migrations:version --add --all -n"
+# php bin/console bin:create-session-table
+# docker-compose exec "${PROJECT_NAME}_php" bash -c "php bin/console doctrine:fixture:load -n"
