@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     openssl
 
 # Set timezone
-RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Rome /etc/localtime && echo Europe/Rome > /etc/timezone
+ARG TIMEZONE
+RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
 
 RUN rm /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/
@@ -15,7 +16,7 @@ ADD nginx.conf /etc/nginx/
 # Generate self-signed certificate
 RUN mkdir /etc/nginx/ssl
 RUN openssl dhparam -out /etc/nginx/ssl/dh.pem 2048
-RUN openssl req -x509 -newkey rsa:4086 -days 3650 -nodes -sha256 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt -subj "/C=IT/ST=Pescara/L=Pescara/O=Purple Network/OU=IT deparment/CN=${PROJECT_NAME}.local"
+RUN openssl req -x509 -newkey rsa:4086 -days 3650 -nodes -sha256 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt -subj "/C=IT/ST=Pescara/L=Pescara/O=Awesome Company/OU=IT deparment/CN=${PROJECT_NAME}.local"
 
 ARG PROJECT_NAME
 ARG PROJECT_PROTOCOL

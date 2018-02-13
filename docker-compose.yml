@@ -29,6 +29,7 @@ services:
                 PROJECT_NAME: ${PROJECT_NAME}
                 PHP_VERSION: ${PHP_VERSION}
                 PROJECT_USER: ${PROJECT_USER}
+                TIMEZONE: ${TIMEZONE}
         image: ${PROJECT_NAME}_php
         container_name: ${PROJECT_NAME}_php
         environment:

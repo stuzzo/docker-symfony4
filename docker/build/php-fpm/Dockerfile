@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     nano
 
 # Set timezone
-RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Rome /etc/localtime && echo Europe/Rome > /etc/timezone
+ARG TIMEZONE
+RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
 
 # Type docker-php-ext-install to see available extensions
 RUN apt-get install -y \
