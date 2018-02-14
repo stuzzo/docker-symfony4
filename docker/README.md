@@ -63,13 +63,16 @@ docker-symfony_php            docker-php-entrypoi…             Up      9000/tc
 ./docker/commands/symfony-permissions
 
 # Check CPU consumption
-$ docker stats $(docker inspect -f "{{ .Name }}" $(docker ps -q))
+docker stats $(docker inspect -f "{{ .Name }}" $(docker ps -q))
 
 # Stop all containers
 ./docker/commands/stop
 
 # Delete all project's containers
-./docker/commands/remove-all-images-and-containers
+./docker/commands/remove-project-containers
+
+# Delete all images and containers (ALERT: it deletes ALL images and containers, not only related to project)
+./docker/commands/remove-project-containers
 ```
 
 ## TIPS
