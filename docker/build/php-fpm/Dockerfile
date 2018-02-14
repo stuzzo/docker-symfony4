@@ -44,17 +44,18 @@ RUN echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 
 # Add user's project
 ARG PROJECT_USER
-RUN mkdir -p /home/${PROJECT_USER} /home/${PROJECT_USER}/.ssh
+RUN mkdir -p /home/${PROJECT_USER} /home/${PROJECT_USER}/.ssh /home/${PROJECT_USER}/bin
 RUN useradd -d /home/${PROJECT_USER} --user-group --shell /bin/bash --uid ${PROJECT_USER} ${PROJECT_USER}
 RUN chown -R ${PROJECT_USER}: /home/${PROJECT_USER} /var/www/${PROJECT_NAME}
-RUN su ${PROJECT_USER}
+ENV PATH=/home/${PROJECT_USER}/bin:$PATH
 
 #############################################################
 ################### COMMANDS AS USER ########################
 #############################################################
 
 # Install Composer only for user's project to avoid run composer as root
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+USER ${PROJECT_USER}
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/home/${PROJECT_USER}/bin --filename=composer
 RUN composer global require "hirak/prestissimo:^0.3"
 
 # Add some usuful bash tips
